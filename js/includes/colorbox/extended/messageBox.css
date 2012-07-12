@@ -1,0 +1,37 @@
+/* Confirmation Boxes */
+#confirm-box p {
+    color: #888888;
+    font-size: 115%;
+    letter-spacing: 0.3px;
+    line-height: 150%;
+    margin: 0;
+    padding: 10px;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+#confirm-buttons {
+	text-align: right;
+	padding-top: 10px;
+}
+
+#confirm-buttons a {
+    margin-right: 10px;
+}
+
+.messageBoxPleaseWait {
+    text-align: center;
+    background: url(imgLoading-220x19.gif) center bottom no-repeat;
+    margin-bottom: 10px;
+    padding-bottom: 22px;
+    min-width: 260px;
+}
+
+.messageBoxError {
+    border: 1px dotted firebrick;
+    padding: 10px 7px;
+    background-color: #fff0f0;
+    min-width: 260px;
+    max-width: 700px;
+    margin-top: 5px;
+}
+
