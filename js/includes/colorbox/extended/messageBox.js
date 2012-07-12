@@ -22,7 +22,7 @@ function messageBox(content, options) {
         opacity: 0.5,
         fastIframe: 'false',
         initialWidth: 70,
-        initialHeight: 30,
+        initialHeight: 30
     };
     if (options['top']) {
         colorboxOptions['top'] = options['top'];
