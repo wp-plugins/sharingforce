@@ -1,0 +1,65 @@
+.button-small {
+	font-size: 11px;
+	line-height: 23px;
+	padding: 2px 10px;
+}
+
+.button-large {
+	font-size: 14px;
+	line-height: 30px;
+	padding: 4px 10px;
+}
+
+.button-small, .button-large {
+	border: 1px solid #55a82b;
+	color: #ffffff;
+	font-weight: bold;
+
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+
+	background-color: #347413;
+	background: -moz-linear-gradient(top, #85c962, #347413);
+	background: -webkit-gradient(linear, left top, left bottom, from(#85c962), to(#347413));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#85c962', endColorstr='#347413');
+
+	-moz-box-shadow: inset 1px 1px #b2de9b, 1px 1px 2px #aaaaaa;
+	-webkit-box-shadow: inset 1px 1px #b2de9b, 1px 1px 2px #aaaaaa;
+	box-shadow: inset 1px 1px #b2de9b, 1px 1px 2px #aaaaaa;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+.button-small:visited, .button-large:visited {
+	color: #ffffff;
+}
+
+.button-small:focus, .button-large:focus {
+	color: #ffff00;
+}
+
+.button-small:hover, .button-large:hover {
+	background-color: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff, #d9ffc5);
+	border: 1px solid #8dc63f;
+	color: #347413;
+
+	-moz-box-shadow: 1px 1px 2px #cccccc;
+}
+
+.button-small.disabled, .button-large.disabled {
+	cursor: default;
+	background-color: #eeeeee;
+	background: -moz-linear-gradient(top, #ffffff, #eeeeee);
+	color: #cfcfcf;
+	-moz-box-shadow: inset 1px 1px #eeeeee, 1px 1px 2px #cccccc;
+	border: none;
+	border: 1px solid #ffffff;
+}
+
+.fr {
+    float: right;
+}
+.cb {
+    clear: both;
+}
