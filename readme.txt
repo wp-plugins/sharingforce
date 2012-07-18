@@ -5,7 +5,7 @@ Requires at least: 2.7
 Tested up to: 3.4
 Stable tag: 2.1.1
 
-Adds a powerful sharing widget to your posts or pages, allowing your visitors to easily share your content on Facebook, Twitter, Google+ and other social networks. You can offer rewards for sharing in the form of Coupons, Sweepstakes or Points. Unique Sharingforce Analytics provides a deep insight into your real social influence across all networks.
+Adds a sharing widget to your pages (Facebook, Twitter, Google+ etc.) with powerful analytics and unique ability to reward your users for sharing!
 
 == Description ==
 Sharingforce is a powerful web application that promotes Digital Word Of Mouth and helps to convert web traffic into high quality leads. You have the ability to inspire your readers by rewarding them for specific actions. Users can be rewarded for their own actions (for example, a Successful Share), or for referred actions taken by their friends (Referred Click, Referred Purchase, or other defined actions). Rewards can be contests, coupons and savings, through the 'Share to Win' or 'Share to Save' reward systems. Each action is rewarded through trackable Sharetificates to members, which Sharingforce issues on behalf of you, allowing them to redeem their rewards.
@@ -38,8 +38,15 @@ This paradigm shift to digital interaction has spawned a new revolution called D
 
 == Installation ==
 
-1. Upload the extracted archive to `wp-content/plugins/`
-2. Activate the plugin through the 'Plugins' menu
-3. Open the plugin settings page Settings -> Sharingforce Config
-4. Choose your password and press 'Enable Sharingforce' button
-5. **Enjoy increased sharing!**
+Check out the plugin page for [instructions with screenshots](http://www.sharingforce.com/wordpress-plugin/#installation)
+
+1) **Sign in** to your WordPress Admin panel:
+2) Click on **Plugins** in the sidebar
+3) Click the **Add New** button
+4) In the search box, enter **Sharingforce** and press **Search Plugins** button
+5) On results screen, click **Install Now**
+6) Once plugin has been downloaded and installed, click **Activate Plugin**
+7) Click **Enable Sharingforce** to go to Sharingforce Config page
+8) On Sharingforce Config page, click **Enable Sharingforce** button
+9) Choose your password and click **Register & Authorize** button to connect your WordPress(tm) installation to Sharingforce(tm)
+10) **Enjoy increased sharing!**

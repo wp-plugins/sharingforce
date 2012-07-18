@@ -532,6 +532,7 @@ class Sharingforce {
         delete_option(self::PER_PAGE_WIDGET_NAME_OPTION_NAME);
         delete_option(self::PER_POST_WIDGET_ID_OPTION_NAME);
         delete_option(self::PER_POST_WIDGET_NAME_OPTION_NAME);
+        delete_option(self::PER_POST_WIDGET_DISABLED_URLS_OPTION_NAME);
         require_once(dirname(__FILE__) . '/view/Cleared.php');
         $continueUrl = $_SERVER['REQUEST_URI'];
         $continueUrl = Sharingforce_UrlService::removeParam(
