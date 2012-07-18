@@ -38,7 +38,7 @@ This paradigm shift to digital interaction has spawned a new revolution called D
 
 == Installation ==
 
-Check out the plugin page for [instructions with screenshots](http://www.sharingforce.com/wordpress-plugin/#installation)
+Check out the plugin page for [instructions with screenshots](http://www.sharingforce.com/wordpress-plugin/#installation).
 
 1) **Sign in** to your WordPress Admin panel
 
