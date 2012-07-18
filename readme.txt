@@ -40,13 +40,22 @@ This paradigm shift to digital interaction has spawned a new revolution called D
 
 Check out the plugin page for [instructions with screenshots](http://www.sharingforce.com/wordpress-plugin/#installation)
 
-1) **Sign in** to your WordPress Admin panel:
+1) **Sign in** to your WordPress Admin panel
+
 2) Click on **Plugins** in the sidebar
+
 3) Click the **Add New** button
+
 4) In the search box, enter **Sharingforce** and press **Search Plugins** button
+
 5) On results screen, click **Install Now**
+
 6) Once plugin has been downloaded and installed, click **Activate Plugin**
+
 7) Click **Enable Sharingforce** to go to Sharingforce Config page
+
 8) On Sharingforce Config page, click **Enable Sharingforce** button
+
 9) Choose your password and click **Register & Authorize** button to connect your WordPress(tm) installation to Sharingforce(tm)
+
 10) **Enjoy increased sharing!**
