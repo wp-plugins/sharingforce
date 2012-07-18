@@ -1,0 +1,13 @@
+.divQuickMessage {
+    position: fixed;
+    z-index: 100000;
+    top: -2px;
+    padding: 8px 20px;
+    border: 1px dotted firebrick;
+}
+.divQuickMessage_Normal {
+    background-color: #ffffae;
+}
+.divQuickMessage_Error {
+    background-color: #ffcccc;
+}
