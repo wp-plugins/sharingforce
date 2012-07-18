@@ -3,7 +3,7 @@ Contributors: sharingforce
 Tags: social, sharing, sharing button, sharing widget, reward for sharing, sweepstakes, coupons
 Requires at least: 2.7
 Tested up to: 3.4
-Stable tag: 2.1
+Stable tag: 2.1.1
 
 Adds a powerful sharing widget to your posts or pages, allowing your visitors to easily share your content on Facebook, Twitter, Google+ and other social networks. You can offer rewards for sharing in the form of Coupons, Sweepstakes or Points. Unique Sharingforce Analytics provides a deep insight into your real social influence across all networks.
 

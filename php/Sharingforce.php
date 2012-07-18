@@ -11,6 +11,8 @@ class Sharingforce {
     const PER_POST_WIDGET_NAME_OPTION_NAME = 'sharingforcePerPostWidgetName';
     const WIDGETS_OPTIONS_GROUP_NAME = 'sharingforceWidgets';
     const SECRET_OPTION_NAME = 'sharingforceSecret';
+    const PER_POST_WIDGET_DISABLED_URLS_OPTION_NAME =
+        'sharingforcePerPostWidgetDisabledUrls';
 
     /** @var string */
     private $pluginDirUrl;
@@ -75,8 +77,8 @@ class Sharingforce {
         );
 
         add_action(
-            'wp_ajax_sharingforce_store_sharingforce_data',
-            array($this, 'wpAjaxSharingforceStoreSharingforceData')
+            'wp_ajax_sharingforce_store_per_post_widget_disabled_urls',
+            array($this, 'wpAjaxSharingforceStorePerPostWidgetDisabledUrls')
         );
 
         add_action('publish_post', array($this, 'publishPost'));
@@ -172,47 +174,27 @@ class Sharingforce {
         $this->printJson($result);
     }
 
-    private function clearCache()
-    {
-        if (function_exists('wp_cache_clear_cache')) {
-            wp_cache_clear_cache();
-        }
-    }
-
-    public function wpAjaxSharingforceStoreSharingforceData()
+    public function wpAjaxSharingforceStorePerPostWidgetDisabledUrls()
     {
         check_ajax_referer(self::NONCE, 'nonce');
         $result = array();
         $errorHtml = '';
         update_option(
-            self::API_PUBLIC_KEY_OPTION_NAME,
-            $_POST['publicApiKey']
+            self::PER_POST_WIDGET_DISABLED_URLS_OPTION_NAME,
+            $_POST['perPostWidgetDisabledUrls']
         );
-        update_option(
-            self::API_SECRET_KEY_OPTION_NAME,
-            $_POST['secretApiKey']
-        );
-        update_option(
-            self::PER_PAGE_WIDGET_ID_OPTION_NAME,
-            ToInt($_POST['perPageWidgetId'])
-        );
-        update_option(
-            self::PER_PAGE_WIDGET_NAME_OPTION_NAME,
-            $_POST['perPageWidgetName']
-        );
-        update_option(
-            self::PER_POST_WIDGET_ID_OPTION_NAME,
-            ToInt($_POST['perPostWidgetId'])
-        );
-        update_option(
-            self::PER_POST_WIDGET_NAME_OPTION_NAME,
-            $_POST['perPostWidgetName']
-        );
+        $this->clearCache();
         if ($errorHtml) {
             $result['errorHtml'] = $errorHtml;
         }
-        $this->clearCache();
         $this->printJson($result);
+    }
+
+    private function clearCache()
+    {
+        if (function_exists('wp_cache_clear_cache')) {
+            wp_cache_clear_cache();
+        }
     }
 
     private function isOnConfigPage()
@@ -285,14 +267,6 @@ class Sharingforce {
 		    '2.0'
         );
         wp_enqueue_style('sharingforce-config.css');
-
-		wp_register_script(
-		    'sharingforce-connect.js',
-		    $this->pluginDirUrl . 'js/sharingforce-connect.js',
-		    array('jquery'),
-		    '2.0'
-        );
-		wp_enqueue_script('sharingforce-connect.js');
 
 		wp_register_script(
 		    'sharingforce-widgets.js',
@@ -385,6 +359,11 @@ class Sharingforce {
         return ToInt(get_option(self::PER_PAGE_WIDGET_ID_OPTION_NAME));
     }
 
+    public function getPerPostWidgetDisabledUrls()
+    {
+        return get_option(self::PER_POST_WIDGET_DISABLED_URLS_OPTION_NAME);
+    }
+
     public function getPerPageWidgetName()
     {
         $result = get_option(self::PER_PAGE_WIDGET_NAME_OPTION_NAME);
@@ -461,14 +440,24 @@ class Sharingforce {
 
     public function filterTheContent($postContent)
     {
-        if ($this->getPerPostWidgetId()) {
-            $postUrl = get_permalink();
-            $widgetDiv = '<div class="sfwidget" data-widget="' . $this->getPerPostWidgetId() . '" data-url="' . $postUrl . '"></div>';
-            $postContent .= '<div style="margin-top: 10px; height:20px;">' .
-                $widgetDiv . '</div>' .
-                '<div style="clear:both"></div>' .
-                '<div style="height:20px;"></div>';
+        if (!$this->getPerPostWidgetId()) {
+            return $postContent;
         }
+        $postUrl = get_permalink();
+        $disabledUrls = $this->getPerPostWidgetDisabledUrls();
+        if ($disabledUrls) {
+            $a = explode("\n", $disabledUrls);
+            global $post;
+            if (in_array($postUrl, $a) || in_array($post->ID, $a)) {
+                return $postContent;
+            }
+        }
+
+        $widgetDiv = '<div class="sfwidget" data-widget="' . $this->getPerPostWidgetId() . '" data-url="' . $postUrl . '"></div>';
+        $postContent .= '<div style="margin-top: 10px; height:20px;">' .
+            $widgetDiv . '</div>' .
+            '<div style="clear:both"></div>' .
+            '<div style="height:20px;"></div>';
         return $postContent;
     }
 
@@ -509,6 +498,10 @@ class Sharingforce {
                 'apiPublicKey' => get_option(self::API_PUBLIC_KEY_OPTION_NAME)
             ))
         );
+        if ($result instanceof WP_Error) {
+            $this->authorizationMessage = '<b>Error:</b> could not connect to Sharingforce server at this time, please try again later. Error: ' . $result->get_error_message();
+            return;
+        }
         if (200 != $result['response']['code']) {
             $this->authorizationMessage = '<b>Error:</b> could not connect to Sharingforce server at this time, please try again later.';
             return;
@@ -571,7 +564,10 @@ class Sharingforce {
                 ->setPerPostWidgetId($this->getPerPostWidgetId())
                 ->setPerPostWidgetName($this->getPerPostWidgetName())
                 ->setSettingsGroupName(self::WIDGETS_OPTIONS_GROUP_NAME)
-                ->setUrlWidgetAdd(Sharingforce_UrlService::widgetAddUrl());
+                ->setUrlWidgetAdd(Sharingforce_UrlService::widgetAddUrl())
+                ->setPerPostWidgetDisabledUrls(
+                    $this->getPerPostWidgetDisabledUrls()
+                );
         } else {
             global $current_user;
             get_currentuserinfo();
@@ -599,7 +595,7 @@ class Sharingforce {
 
     private function addOgTags()
     {
-		if (is_admin() || !is_single()) {
+		if (is_admin() || (!is_single() && !is_page())) {
 		    return;
         }
         global $post;

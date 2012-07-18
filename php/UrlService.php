@@ -9,23 +9,23 @@ class Sharingforce_UrlService
 
     static public function businessHomeUrl()
     {
-        return 'http://www.sharingforce.com/business/';
+        return 'https://www.sharingforce.com/business/';
     }
 
     static public function accountCreateUrl()
     {
-        return 'http://www.sharingforce.com/account/create/';
+        return 'https://www.sharingforce.com/account/create/';
     }
 
     static public function widgetEditUrl($widgetId)
     {
-        return 'http://www.sharingforce.com/business/widgets/edit/?wid=' .
+        return 'https://www.sharingforce.com/business/widgets/edit/?wid=' .
             $widgetId;
     }
 
     static public function widgetAddUrl()
     {
-        return 'http://www.sharingforce.com/business/widgets/add/';
+        return 'https://www.sharingforce.com/business/widgets/add/';
     }
 
     static public function appendParams($url, $additionalParams)

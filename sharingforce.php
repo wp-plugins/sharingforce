@@ -3,7 +3,7 @@
 Plugin Name: Sharingforce
 Plugin URI: http://www.sharingforce.com/wordpress-plugin/
 Description: A proven way to increase traffic and sharing on your web site. Sharingforce provides a great-looking sharing widget and optimizes Open Graph tags, but most importantly you have a simple way to offer rewards for sharing such as Sweepstakes, Gifts and Discounts! Works great on iPad as well as desktop computers.
-Version: 2.1
+Version: 2.1.1
 Author: Sharingforce
 Author URI: http://www.sharingforce.com/
 License: GPLv2 or later

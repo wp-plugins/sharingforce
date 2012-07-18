@@ -47,3 +47,7 @@
 #tWidgets td.tdLabel label {
     padding-left: 5px;
 }
+#txtPerPostWidgetDisabledUrls {
+    width: 387px;
+    height: 100px;
+}

@@ -65,7 +65,24 @@
             <a id="aSelectWidget_PerPost" href="javascript:void(0)" class="button-small">Select</a>
         </td>
     </tr>
+    <tr>
+        <td colspan="3">
+            Disable per-post widget on the following pages:
+            <br />
+            <textarea id="txtPerPostWidgetDisabledUrls"><?php echo $view->getPerPostWidgetDisabledUrls() ?></textarea>
+            <div style="font-size: 8pt; color: gray;">
+                Enter one URL or Post ID per line to disable per-post widget on selected pages.<br />Leave the field empty to enable per-post widget on all pages.
+            </div>
+        </td>
+        <td>&nbsp;</td>
+        <td valign="top">
+            <br />
+            <a id="aPerPostWidgetDisabledUrls_Save" href="javascript:void(0)" class="button-small">Save</a>
+        </td>
+    </tr>
 </table>
+
+
 
 <br /><br /><br /><br /><br /><br />
 
@@ -83,7 +100,7 @@
                 <span style="float:right; color: gray;">Step 2 of 2</span>
             </h3>
             <p>
-                We will need your API keys in order to communicate with Sharingforce&trade; servers on your behalf from this WordPress admin interface. Please copy the keys from <a href="http://www.sharingforce.com/business/api/" target="_blank">Sharingforce&trade; API page</a> and paste them to the form below.
+                We will need your API keys in order to communicate with Sharingforce&trade; servers on your behalf from this WordPress admin interface. Please copy the keys from <a href="https://www.sharingforce.com/business/api/" target="_blank">Sharingforce&trade; API page</a> and paste them to the form below.
             </p>
             <table cellpadding="5">
                 <tr>
@@ -309,9 +326,13 @@
     <p>
         <a href="http://www.sharingforce.com/about-us/" target="_blank">About Sharingforce&trade;</a> | <a href="http://www.sharingforce.com/privacy-policy/" target="_blank">Privacy Policy</a> | <a href="http://www.sharingforce.com/terms-of-use/" target="_blank">Terms of Use</a> | <a href="http://www.sharingforce.com/faq/" target="_blank">FAQ</a> | <a href="http://www.sharingforce.com/contact-us/" target="_blank">Contact Us</a>
     </p>
+<?php
+/*
     <p>
         If you like this plugin and find it useful, please <a href="http://wordpress.org/extend/plugins/sharingforce/" target="_blank" style="font-weight:bold;">spread the word by rating us</a> on WordPress.org. Thank you for using Sharingforce&trade;.
     </p>
+*/
+?>
 <?php if ($view->getIsEnabled()): ?>
     <p>
         If for any reason you would like to discontinue using Sharingforce&trade; on this website, you can always <a href="<?php echo Sharingforce_UrlService::appendParams($_SERVER['REQUEST_URI'], 'clear=all') ?>" id="aClearAll">clear out all Sharingforce&trade; data</a> stored in this Wordpress installation.

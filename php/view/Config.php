@@ -68,6 +68,10 @@ class Sharingforce_View_Config extends Sharingforce_View
      * @var string
      */
     private $authorizationMessage;
+    /**
+     * @var string
+     */
+    private $perPostWidgetDisabledUrls;
 
     // have to have it here for backward compatibility with PHP <5.3
     static public function getInstance()
@@ -254,5 +258,16 @@ class Sharingforce_View_Config extends Sharingforce_View
     public function getAuthorizationMessage()
     {
         return $this->authorizationMessage;
+    }
+
+    public function setPerPostWidgetDisabledUrls($perPostWidgetDisabledUrls)
+    {
+        $this->perPostWidgetDisabledUrls = $perPostWidgetDisabledUrls;
+        return $this;
+    }
+
+    public function getPerPostWidgetDisabledUrls()
+    {
+        return $this->perPostWidgetDisabledUrls;
     }
 }
