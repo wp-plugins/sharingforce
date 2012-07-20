@@ -45,6 +45,37 @@
         </td>
     </tr>
     <tr>
+        <td colspan="3">
+            <?php
+                $perPageWidgetDisabledUrls =
+                    $view->getPerPageWidgetDisabledUrls();
+                $s = 'Disable per-Page widget';
+                if ($perPageWidgetDisabledUrls) {
+                    $s = '<b>' . $s . '</b>';
+                    $style = '';
+                } else {
+                    $s = '<a href="javascript:void(0)" id="aDisablePerPageWidget">' . $s . '</a>';
+                    $style = ' style="display: none"';
+                }
+            ?>
+            <?php echo $s ?> on certain pages
+            <div id="divDisablePerPageWidget"<?php echo $style; ?>>
+                <textarea id="txtPerPageWidgetDisabledUrls"><?php echo $perPageWidgetDisabledUrls ?></textarea>
+                <div style="font-size: 8pt; color: gray;">
+                    Enter one URL or Page ID per line to disable per-Page widget on selected pages.<br />Leave the field empty to enable per-Page widget on all pages.
+                </div>
+            </div>
+        </td>
+        <td>&nbsp;</td>
+        <td valign="top">
+            <div id="divDisablePerPageWidget_Button"<?php echo $style; ?>>
+                <br />
+                <a id="aPerPageWidgetDisabledUrls_Save" href="javascript:void(0)" class="button-small">Save</a>
+            </div>
+        </td>
+    </tr>
+    <tr><td colspan="5">&nbsp;</td></tr>
+    <tr>
         <td>
             <b>Per-post (fixed) widget:</b>
         </td>
@@ -67,17 +98,32 @@
     </tr>
     <tr>
         <td colspan="3">
-            Disable per-post widget on the following pages:
-            <br />
-            <textarea id="txtPerPostWidgetDisabledUrls"><?php echo $view->getPerPostWidgetDisabledUrls() ?></textarea>
-            <div style="font-size: 8pt; color: gray;">
-                Enter one URL or Post ID per line to disable per-post widget on selected pages.<br />Leave the field empty to enable per-post widget on all pages.
+            <?php
+                $perPostWidgetDisabledUrls =
+                    $view->getPerPostWidgetDisabledUrls();
+                $s = 'Disable per-post widget';
+                if ($perPostWidgetDisabledUrls) {
+                    $s = '<b>' . $s . '</b>';
+                    $style = '';
+                } else {
+                    $s = '<a href="javascript:void(0)" id="aDisablePerPostWidget">' . $s . '</a>';
+                    $style = ' style="display: none"';
+                }
+            ?>
+            <?php echo $s ?> on certain pages
+            <div id="divDisablePerPostWidget"<?php echo $style; ?>>
+                <textarea id="txtPerPostWidgetDisabledUrls"><?php echo $perPostWidgetDisabledUrls ?></textarea>
+                <div style="font-size: 8pt; color: gray;">
+                    Enter one URL or Post ID per line to disable per-post widget on selected pages.<br />Leave the field empty to enable per-post widget on all pages.
+                </div>
             </div>
         </td>
         <td>&nbsp;</td>
         <td valign="top">
-            <br />
-            <a id="aPerPostWidgetDisabledUrls_Save" href="javascript:void(0)" class="button-small">Save</a>
+            <div id="divDisablePerPostWidget_Button"<?php echo $style; ?>>
+                <br />
+                <a id="aPerPostWidgetDisabledUrls_Save" href="javascript:void(0)" class="button-small">Save</a>
+            </div>
         </td>
     </tr>
 </table>

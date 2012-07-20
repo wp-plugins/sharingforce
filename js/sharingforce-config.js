@@ -36,7 +36,7 @@ jQuery('#aPerPostWidgetDisabledUrls_Save').click(function() {
         nonce: sharingforceNonce,
         perPostWidgetDisabledUrls: jQuery('#txtPerPostWidgetDisabledUrls').val()
     };
-    messageBoxPleaseWait('Saving list of URLs...');
+    messageBoxPleaseWait('Saving...');
     jQuery.post(
         ajaxurl,
         data,
@@ -44,12 +44,42 @@ jQuery('#aPerPostWidgetDisabledUrls_Save').click(function() {
             if (result['errorHtml']) {
                 showQuickMessageError(result['errorHtml']);
             } else {
-                showQuickMessage('List of URLs stored successfully');
+                showQuickMessage('Disabled pages stored successfully');
             }
             messageBoxClose();
         }
     );
 });
 
+jQuery('#aPerPageWidgetDisabledUrls_Save').click(function() {
+    var data = {
+        action: 'sharingforce_store_per_page_widget_disabled_urls',
+        nonce: sharingforceNonce,
+        perPageWidgetDisabledUrls: jQuery('#txtPerPageWidgetDisabledUrls').val()
+    };
+    messageBoxPleaseWait('Saving...');
+    jQuery.post(
+        ajaxurl,
+        data,
+        function (result) {
+            if (result['errorHtml']) {
+                showQuickMessageError(result['errorHtml']);
+            } else {
+                showQuickMessage('Disabled pages stored successfully');
+            }
+            messageBoxClose();
+        }
+    );
+});
+
+jQuery('#aDisablePerPostWidget').click(function() {
+    jQuery('#divDisablePerPostWidget').slideDown();
+    jQuery('#divDisablePerPostWidget_Button').slideDown();
+});
+
+jQuery('#aDisablePerPageWidget').click(function() {
+    jQuery('#divDisablePerPageWidget').slideDown();
+    jQuery('#divDisablePerPageWidget_Button').slideDown();
+});
 
 });

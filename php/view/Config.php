@@ -72,6 +72,10 @@ class Sharingforce_View_Config extends Sharingforce_View
      * @var string
      */
     private $perPostWidgetDisabledUrls;
+    /**
+     * @var string
+     */
+    private $perPageWidgetDisabledUrls;
 
     // have to have it here for backward compatibility with PHP <5.3
     static public function getInstance()
@@ -269,5 +273,16 @@ class Sharingforce_View_Config extends Sharingforce_View
     public function getPerPostWidgetDisabledUrls()
     {
         return $this->perPostWidgetDisabledUrls;
+    }
+
+    public function setPerPageWidgetDisabledUrls($perPageWidgetDisabledUrls)
+    {
+        $this->perPageWidgetDisabledUrls = $perPageWidgetDisabledUrls;
+        return $this;
+    }
+
+    public function getPerPageWidgetDisabledUrls()
+    {
+        return $this->perPageWidgetDisabledUrls;
     }
 }

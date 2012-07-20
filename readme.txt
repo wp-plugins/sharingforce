@@ -3,7 +3,7 @@ Contributors: sharingforce
 Tags: social, sharing, sharing button, sharing widget, reward for sharing, sweepstakes, coupons
 Requires at least: 2.7
 Tested up to: 3.4
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 
 Adds a sharing widget to your pages (Facebook, Twitter, Google+ etc.) with powerful analytics and unique ability to reward your users for sharing!
 
@@ -19,6 +19,8 @@ Research studies indicate that sharers will only share information that they fin
 This paradigm shift to digital interaction has spawned a new revolution called Digital Word of Mouth(tm).
 
 = Recent Updates =
+* Sharing widgets can be disabled on selected pages
+* HTTPS support
 * Classic widget with buttons in 3 different sizes under your posts
 * Docked sharing widget on the left, right, top or bottom of each page
 * Native Facebook Like, Twitter Tweet, Google +1, and LinkedIn Share buttons seemlessly integrated, with counters on the right or on top of the buttons

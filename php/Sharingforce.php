@@ -13,6 +13,8 @@ class Sharingforce {
     const SECRET_OPTION_NAME = 'sharingforceSecret';
     const PER_POST_WIDGET_DISABLED_URLS_OPTION_NAME =
         'sharingforcePerPostWidgetDisabledUrls';
+    const PER_PAGE_WIDGET_DISABLED_URLS_OPTION_NAME =
+        'sharingforcePerPageWidgetDisabledUrls';
 
     /** @var string */
     private $pluginDirUrl;
@@ -79,6 +81,11 @@ class Sharingforce {
         add_action(
             'wp_ajax_sharingforce_store_per_post_widget_disabled_urls',
             array($this, 'wpAjaxSharingforceStorePerPostWidgetDisabledUrls')
+        );
+
+        add_action(
+            'wp_ajax_sharingforce_store_per_page_widget_disabled_urls',
+            array($this, 'wpAjaxSharingforceStorePerPageWidgetDisabledUrls')
         );
 
         add_action('publish_post', array($this, 'publishPost'));
@@ -182,6 +189,22 @@ class Sharingforce {
         update_option(
             self::PER_POST_WIDGET_DISABLED_URLS_OPTION_NAME,
             $_POST['perPostWidgetDisabledUrls']
+        );
+        $this->clearCache();
+        if ($errorHtml) {
+            $result['errorHtml'] = $errorHtml;
+        }
+        $this->printJson($result);
+    }
+
+    public function wpAjaxSharingforceStorePerPageWidgetDisabledUrls()
+    {
+        check_ajax_referer(self::NONCE, 'nonce');
+        $result = array();
+        $errorHtml = '';
+        update_option(
+            self::PER_PAGE_WIDGET_DISABLED_URLS_OPTION_NAME,
+            $_POST['perPageWidgetDisabledUrls']
         );
         $this->clearCache();
         if ($errorHtml) {
@@ -364,6 +387,11 @@ class Sharingforce {
         return get_option(self::PER_POST_WIDGET_DISABLED_URLS_OPTION_NAME);
     }
 
+    public function getPerPageWidgetDisabledUrls()
+    {
+        return get_option(self::PER_PAGE_WIDGET_DISABLED_URLS_OPTION_NAME);
+    }
+
     public function getPerPageWidgetName()
     {
         $result = get_option(self::PER_PAGE_WIDGET_NAME_OPTION_NAME);
@@ -434,6 +462,15 @@ class Sharingforce {
     {
         if (!$this->getPerPageWidgetId()) {
             return;
+        }
+        $pageUrl = site_url() . $_SERVER['REQUEST_URI'];
+        $disabledUrls = $this->getPerPageWidgetDisabledUrls();
+        if ($disabledUrls) {
+            $a = explode("\n", $disabledUrls);
+            global $post;
+            if (in_array($pageUrl, $a) || ($post && in_array($post->ID, $a))) {
+                return;
+            }
         }
         echo '<div class="sfwidget" data-widget="' . $this->getPerPageWidgetId() . '"></div>';
     }
@@ -568,6 +605,9 @@ class Sharingforce {
                 ->setUrlWidgetAdd(Sharingforce_UrlService::widgetAddUrl())
                 ->setPerPostWidgetDisabledUrls(
                     $this->getPerPostWidgetDisabledUrls()
+                )
+                ->setPerPageWidgetDisabledUrls(
+                    $this->getPerPageWidgetDisabledUrls()
                 );
         } else {
             global $current_user;
