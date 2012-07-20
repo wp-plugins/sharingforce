@@ -1,0 +1,423 @@
+<?php
+    /** @var $view Sharingforce_View_Config */
+    $view = $this;
+?>
+<div class="wrap">
+<h2>Sharingforce&trade; Configuration</h2>
+
+<?php if ($view->getAuthorizationMessage()): ?>
+<div class='updated fade'>
+    <p>
+        <?php echo $view->getAuthorizationMessage() ?>
+    </p>
+</div>
+<?php endif; ?>
+
+<?php
+    // NORMAL MODE - sharingforce is connected
+    if ($view->getIsEnabled()):
+?>
+
+<p>
+    To manage campaigns and rewards, please visit <a href="<?php echo Sharingforce_UrlService::businessHomeUrl(); ?>" target="_blank">your Business Home at Sharingforce</a> - all changes you make there will be reflected on your website automatically.
+</p>
+
+<table>
+    <tr>
+        <td>
+            <b>Per-page (docked) widget ID:</b>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+            <div id="divWidget_PerPage" class="divWidget<?php if ($view->getPerPageWidgetId()) echo ' selected'; ?>">
+                <?php if ($view->getPerPageWidgetId()): ?>
+                    <?php echo htmlentities($view->getPerPageWidgetName()); ?>
+                <?php else: ?>
+                    (not selected)
+                <?php endif; ?>
+            </div>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+            <a id="aEditWidget_PerPage" href="<?php echo Sharingforce_UrlService::widgetEditUrl($view->getPerPageWidgetId()); ?>" class="button-small<?php if (!$view->getPerPageWidgetId()) echo ' disabled'; ?>" target="_blank">Edit</a>
+            <a id="aClearWidget_PerPage" href="javascript:void(0)" class="button-small<?php if (!$view->getPerPageWidgetId()) echo ' disabled'; ?>">Clear</a>
+            <a id="aSelectWidget_PerPage" href="javascript:void(0)" class="button-small">Select</a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <?php
+                $perPageWidgetDisabledUrls =
+                    $view->getPerPageWidgetDisabledUrls();
+                $s = 'Disable per-Page widget';
+                if ($perPageWidgetDisabledUrls) {
+                    $s = '<b>' . $s . '</b>';
+                    $style = '';
+                } else {
+                    $s = '<a href="javascript:void(0)" id="aDisablePerPageWidget">' . $s . '</a>';
+                    $style = ' style="display: none"';
+                }
+            ?>
+            <?php echo $s ?> on certain pages
+            <div id="divDisablePerPageWidget"<?php echo $style; ?>>
+                <textarea id="txtPerPageWidgetDisabledUrls"><?php echo $perPageWidgetDisabledUrls ?></textarea>
+                <div style="font-size: 8pt; color: gray;">
+                    Enter one URL or Page ID per line to disable per-Page widget on selected pages.<br />Leave the field empty to enable per-Page widget on all pages.
+                </div>
+            </div>
+        </td>
+        <td>&nbsp;</td>
+        <td valign="top">
+            <div id="divDisablePerPageWidget_Button"<?php echo $style; ?>>
+                <br />
+                <a id="aPerPageWidgetDisabledUrls_Save" href="javascript:void(0)" class="button-small">Save</a>
+            </div>
+        </td>
+    </tr>
+    <tr><td colspan="5">&nbsp;</td></tr>
+    <tr>
+        <td>
+            <b>Per-post (fixed) widget:</b>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+            <div id="divWidget_PerPost" class="divWidget<?php if ($view->getPerPostWidgetId()) echo ' selected'; ?>">
+                <?php if ($view->getPerPostWidgetId()): ?>
+                    <?php echo htmlentities($view->getPerPostWidgetName()); ?>
+                <?php else: ?>
+                    (not selected)
+                <?php endif; ?>
+            </div>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+            <a id="aEditWidget_PerPost" href="<?php echo Sharingforce_UrlService::widgetEditUrl($view->getPerPostWidgetId()); ?>" class="button-small<?php if (!$view->getPerPostWidgetId()) echo ' disabled'; ?>" target="_blank">Edit</a>
+            <a id="aClearWidget_PerPost" href="javascript:void(0)" class="button-small<?php if (!$view->getPerPostWidgetId()) echo ' disabled'; ?>">Clear</a>
+            <a id="aSelectWidget_PerPost" href="javascript:void(0)" class="button-small">Select</a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <?php
+                $perPostWidgetDisabledUrls =
+                    $view->getPerPostWidgetDisabledUrls();
+                $s = 'Disable per-post widget';
+                if ($perPostWidgetDisabledUrls) {
+                    $s = '<b>' . $s . '</b>';
+                    $style = '';
+                } else {
+                    $s = '<a href="javascript:void(0)" id="aDisablePerPostWidget">' . $s . '</a>';
+                    $style = ' style="display: none"';
+                }
+            ?>
+            <?php echo $s ?> on certain pages
+            <div id="divDisablePerPostWidget"<?php echo $style; ?>>
+                <textarea id="txtPerPostWidgetDisabledUrls"><?php echo $perPostWidgetDisabledUrls ?></textarea>
+                <div style="font-size: 8pt; color: gray;">
+                    Enter one URL or Post ID per line to disable per-post widget on selected pages.<br />Leave the field empty to enable per-post widget on all pages.
+                </div>
+            </div>
+        </td>
+        <td>&nbsp;</td>
+        <td valign="top">
+            <div id="divDisablePerPostWidget_Button"<?php echo $style; ?>>
+                <br />
+                <a id="aPerPostWidgetDisabledUrls_Save" href="javascript:void(0)" class="button-small">Save</a>
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+
+<br /><br /><br /><br /><br /><br />
+
+<?php
+    // ENTER API KEYS FORM - user pressed "skip"
+    elseif ($view->getIsEnterApiKeysForm()):
+?>
+
+<form id="frmConnect">
+<table>
+    <tr>
+        <td style="padding-right: 20px;">
+            <h3>
+                Connect to Sharingforce&trade;
+                <span style="float:right; color: gray;">Step 2 of 2</span>
+            </h3>
+            <p>
+                We will need your API keys in order to communicate with Sharingforce&trade; servers on your behalf from this WordPress admin interface. Please copy the keys from <a href="https://www.sharingforce.com/business/api/" target="_blank">Sharingforce&trade; API page</a> and paste them to the form below.
+            </p>
+            <table cellpadding="5">
+                <tr>
+                    <td><b>Public Key:</b></td>
+                    <td>
+                        <input type="text" id="publicKey" size="25" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Secret Key:</b></td>
+                    <td>
+                        <input type="text" id="secretKey" size="92" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="checkbox" id="chbAgreeToTerms" /><label for="chbAgreeToTerms"> By submitting this form you agree to Sharingforce&trade; <a href="http://www.sharingforce.com/terms-of-use/" target="_blank">Terms of Use</a></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="checkbox" id="chbAgreeToPoweredBySharingforceLink" /><label for="chbAgreeToPoweredBySharingforceLink"> Grant permission to display "Powered by Sharingforce" link in the widget</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="submit">
+                            <input class="button-primary" type="submit" value="Connect to Sharingforce&trade;" id="btnConnect">
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td style="border-left: 1px dashed silver; padding-left: 20px;" valign="top">
+            <nobr><strong>Don't have a Sharingforce&trade; account?</strong></nobr>
+            <p>
+                If you are new to Sharingforce&trade;, please go back to <a href="<?php echo Sharingforce_UrlService::removeParam($_SERVER['REQUEST_URI'], 'skip') ?>">Enable Sharingforce&trade;</a> page.
+            </p>
+        </td>
+    </tr>
+</table>
+</form>
+
+<?php
+    // ENABLE SHARINGFORCE form - api keys have not yet been entered
+    else:
+?>
+
+<h3>
+    Enable Sharingforce&trade;
+</h3>
+<p>
+    Thank you for activating our plugin! You are one step away from enabling sharing on your website. We now need to connect this website to your Sharingforce&trade; account. Registration is free, with immediate availability of all our free features. <b>Sharing will be enabled immediately upon registering.</b>
+</p>
+<form id="frmEnableSharingforce" action="https://www.sharingforce.com/wordpress-plugin/connect/" method="POST">
+    <input
+        type="hidden"
+        name="secret"
+        value="<?php echo htmlentities($view->getSecret()); ?>"
+    />
+    <input
+        type="hidden"
+        name="firstName"
+        value="<?php echo htmlentities($view->getFirstName()); ?>"
+    />
+    <input
+        type="hidden"
+        name="lastName"
+        value="<?php echo htmlentities($view->getLastName()); ?>"
+    />
+    <input
+        type="hidden"
+        name="email"
+        value="<?php echo htmlentities($view->getEmail()); ?>"
+    />
+    <input
+        type="hidden"
+        name="siteUrl"
+        value="<?php echo htmlentities($view->getUrl()); ?>"
+    />
+    <input
+        type="hidden"
+        name="businessName"
+        value="<?php echo htmlentities($view->getBlogName()); ?>"
+    />
+    <input
+        type="hidden"
+        name="backUrl"
+        value="<?php echo htmlentities($view->getBackUrl()); ?>"
+    />
+    <p class="submit">
+        <input class="button-primary" type="submit" value="Enable Sharingforce&trade; &raquo;">
+    </p>
+</form>
+
+<?php if (false): ?>
+<hr>
+
+<table>
+    <tr>
+        <td style="padding-right: 20px;">
+            <h3>
+                Enable Sharingforce&trade;
+                <span style="float:right; color: gray;">Step 2 of 2</span>
+            </h3>
+            <p>
+                Thank you for activating our plugin! You are one step away from enabling sharing on your website. We will create a Sharingforce&trade; account for you, register your website and prepare the sharing widgets for you right away. <b>Sharing will be enabled immediately upon submitting of this form.</b> Registration is free, with immediate availability of all our free features.
+            </p>
+            <form id="frmEnableSharingforce">
+            <table cellpadding="5">
+                <tr>
+                    <td>
+                        <label for="firstName"><b>First Name:</b></label></td>
+                    <td>
+                        <input
+                            type="text"
+                            id="firstName"
+                            value="<?php echo htmlentities($view->getFirstName()); ?>"
+                            size="30"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="lastName"><b>Last Name:</b></label>
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            id="lastName"
+                            value="<?php echo htmlentities($view->getLastName()); ?>"
+                            size="30"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="email"><b>Your email:</b></label></td>
+                    <td>
+                        <input
+                            type="text"
+                            id="email"
+                            value="<?php echo htmlentities($view->getEmail()); ?>"
+                            size="70"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="websiteUrl"><b>Website URL:</b></label></td>
+                    <td>
+                        <input
+                            type="text"
+                            id="websiteUrl"
+                            value="<?php echo htmlentities($view->getUrl()); ?>"
+                            size="70"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="businessName"><b>Business / Blog Name:</b></label></td>
+                    <td>
+                        <input
+                            type="text"
+                            id="businessName"
+                            value="<?php echo htmlentities($view->getBlogName()); ?>"
+                            size="70"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="password"><b>Your Sharingforce&trade; password:</b></label></td>
+                    <td>
+                        <input
+                            type="password"
+                            id="password"
+                            autocomplete="off"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="passwordConfirm"><b>Confirm your password:</b></label></td>
+                    <td>
+                        <input
+                            type="password"
+                            id="passwordConfirm"
+                            autocomplete="off"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="checkbox" id="chbAgreeToTerms" /><label for="chbAgreeToTerms"> By submitting this form you agree to Sharingforce&trade; <a href="http://www.sharingforce.com/terms-of-use/" target="_blank">Terms of Use</a></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="checkbox"  id="chbAgreeToPoweredBySharingforceLink" /><label for="chbAgreeToPoweredBySharingforceLink"> Grant permission to display "Powered by Sharingforce" link in the widget</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="submit">
+                            <input class="button-primary" type="submit" value="Enable Sharingforce&trade;">
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            </form>
+        </td>
+        <td style="border-left: 1px dashed silver; padding-left: 20px;" valign="top">
+            <nobr><strong>Already have an account with Sharingforce?</strong></nobr>
+            <p>
+                If you're already using Sharingforce&trade; and have an account with us, please <a href="<?php echo Sharingforce_UrlService::appendParams($_SERVER['REQUEST_URI'], 'skip=1') ?>" id="aManual">skip the registration</a>.
+            </p>
+        </td>
+    </tr>
+</table>
+
+<?php endif; ?>
+
+<?php endif; ?>
+
+<div class="footer">
+    <p>
+        <a href="http://www.sharingforce.com/about-us/" target="_blank">About Sharingforce&trade;</a> | <a href="http://www.sharingforce.com/privacy-policy/" target="_blank">Privacy Policy</a> | <a href="http://www.sharingforce.com/terms-of-use/" target="_blank">Terms of Use</a> | <a href="http://www.sharingforce.com/faq/" target="_blank">FAQ</a> | <a href="http://www.sharingforce.com/contact-us/" target="_blank">Contact Us</a>
+    </p>
+<?php
+/*
+    <p>
+        If you like this plugin and find it useful, please <a href="http://wordpress.org/extend/plugins/sharingforce/" target="_blank" style="font-weight:bold;">spread the word by rating us</a> on WordPress.org. Thank you for using Sharingforce&trade;.
+    </p>
+*/
+?>
+<?php if ($view->getIsEnabled()): ?>
+    <p>
+        If for any reason you would like to discontinue using Sharingforce&trade; on this website, you can always <a href="<?php echo Sharingforce_UrlService::appendParams($_SERVER['REQUEST_URI'], 'clear=all') ?>" id="aClearAll">clear out all Sharingforce&trade; data</a> stored in this Wordpress installation.
+    </p>
+<?php endif; ?>
+    <p>
+        Copyright &copy; 2012 Sharingforce&trade; Inc. All Rights Reserved
+    </p>
+</div>
+
+</div>
+
+<div style="display:none">
+<div id="divSelectWidget">
+    <div id="divSelectWidget_Toolbar">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+                <td width="100%">
+                    You have <span id="spanSelectWidget_WidgetCount"></span> <span id="spanSelectWidget_WidgetType"></span> widget<span id="spanSelectWidget_WidgetCount_Plural">s</span>:
+                </td>
+                <td align="right">
+                    <nobr>
+                        <a id="aNewWidget" href="<?php echo $view->getUrlWidgetAdd(); ?>" class="button-small" target="_blank">New Widget</a>
+                        <a id="aRefresh" href="javascript:void(0);" class="button-small">Refresh</a>
+                    </nobr>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <table id="tWidgets" cellpadding="0" cellspacing="0" border="0">
+        <tr id="trNoWidget">
+            <td class="tdRadio"><input type="radio" name="rbWidget" id="rbWidget_0" value="0"></td>
+            <td class="tdLabel"><label for="rbWidget_0"><b>No <span id="spanWidgetTypeName"></span> Widget</b></label></td>
+        </tr>
+    </table>
+    <div id="divSelectWidget_Buttons">
+        <a id="btnSelectWidget_Ok" href="javascript:void(0);" class="button-large">Select Sharing Widget</a>
+        &nbsp;
+        <a id="btnSelectWidget_Cancel" href="javascript:void(0);" class="button-large">Cancel</a>
+    </div>
+</div>
+</div>

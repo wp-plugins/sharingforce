@@ -1,0 +1,60 @@
+.footer {
+    font-size: 9pt;
+    color: gray;
+}
+.divWidget {
+    border: 1px solid #cccccc;
+    padding: 3px 7px;
+    width: 200px;
+    overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+}
+.divWidget.selected {
+    background-color: #f0fff0;
+    font-weight: bold;
+}
+#divSelectWidget {
+    width: 600px;
+}
+#divSelectWidget_Buttons {
+    padding: 10px 0 0 0;
+    border-top: 1px solid #cccccc;
+    text-align: center;
+}
+#divSelectWidget_Toolbar {
+    border: 1px solid #cccccc;
+    padding: 5px 10px;
+    background-color: #fafafa;
+    margin-top: 10px;
+}
+#spanSelectWidget_WidgetCount {
+    font-weight: bold;
+}
+#tWidgets {
+    margin: 10px 0;
+    font-size: 12pt;
+}
+#tWidgets tr:hover {
+    background-color: #f0fff0;
+}
+#tWidgets td.tdRadio {
+    padding-left: 10px;
+}
+#tWidgets td.tdLabel {
+    padding: 2px 10px 5px 0;
+}
+#tWidgets td.tdLabel label {
+    padding-left: 5px;
+}
+#txtPerPostWidgetDisabledUrls, #txtPerPageWidgetDisabledUrls {
+    width: 387px;
+    height: 100px;
+}
+#aDisablePerPostWidget, #aDisablePerPageWidget {
+    text-decoration: none;
+    border-bottom: 1px dashed #21759b;
+}
+#aDisablePerPostWidget:hover, #aDisablePerPageWidget:hover {
+    border-bottom: 1px dashed #d54e21;
+}
